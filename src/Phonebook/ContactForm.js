@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import styles from './Phonebook.module.css';
+
 class ContactForm extends Component {
   state = {
     name: '',
@@ -24,10 +26,11 @@ class ContactForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.formSubmit}>
-          <label>
+        <form className={styles.phonebook__form} onSubmit={this.formSubmit}>
+          <label className={styles.phonebook__label}>
             Name
             <input
+              className={styles.phonebook__input}
               type="text"
               name="name"
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -38,18 +41,22 @@ class ContactForm extends Component {
             />
           </label>
 
-          <p>Number</p>
-          <input
-            type="tel"
-            name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-            title="Номер телефона должен состоять из цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
-            required
-            value={this.state.number}
-            onChange={this.inputChange}
-          />
-
-          <button type="submit">Add contact</button>
+          <label className={styles.phonebook__label}>
+            Number
+            <input
+              className={styles.phonebook__input}
+              type="tel"
+              name="number"
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Номер телефона должен состоять из цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
+              required
+              value={this.state.number}
+              onChange={this.inputChange}
+            />
+          </label>
+          <button className={styles.phonebook__button_form} type="submit">
+            Add contact
+          </button>
         </form>
       </div>
     );

@@ -1,21 +1,39 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const ContactList = contacts => {
-  console.log(contacts);
-  const contact = contacts;
+import styles from './Phonebook.module.css';
+
+const ContactList = ({ contacts, onDeleteContact }) => {
   return (
-    <ul>
-      {contact.map(contac => {
-        console.log(contac);
+    <ul className={styles.phonebook__list}>
+      {contacts.map(({ id, name, number }) => {
         return (
-          <li key={contac.id}>
-            {contac.name}: {contac.number}
-            <button>Delete contact</button>
+          <li className={styles.phonebook__item} key={id}>
+            {name}: {number}
+            <button
+              className={styles.phonebook__button}
+              onClick={() => {
+                onDeleteContact(id);
+              }}
+            >
+              Delete contact
+            </button>
           </li>
         );
       })}
     </ul>
   );
+};
+
+ContactList.propTypes = {
+  onDeleteContact: PropTypes.func.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    }),
+  ),
 };
 
 export default ContactList;
